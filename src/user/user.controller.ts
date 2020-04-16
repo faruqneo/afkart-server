@@ -1,4 +1,22 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+import { User } from '../interfaces';
+import { UserService } from './user.service';
+import { CreateUserDto } from '../dto';
 
+@ApiTags('user')
 @Controller('user')
-export class UserController {}
+export class UserController {
+
+    constructor(private userService: UserService) { }
+
+    @Post('registration')
+    async registration(@Body() createUserDto: CreateUserDto): Promise<User> {
+        return await this.userService.registration(createUserDto);
+    }
+
+    @Post('login')
+    async login(@Body() createUserDto: CreateUserDto) {
+
+    }
+}

@@ -1,5 +1,5 @@
-import { Injectable, Post, HttpException, HttpStatus } from '@nestjs/common';
-import { User } from '../interfaces/user.interface';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { User } from '../interfaces';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
@@ -14,6 +14,10 @@ export class UserService {
         } catch (error) {
             throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    async login(user: User) {
+
     }
 
 }

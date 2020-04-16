@@ -1,5 +1,6 @@
 
 export const UserSchema = {
+    
     firstName: {
         type: String,
         trim: true,
@@ -14,14 +15,16 @@ export const UserSchema = {
 
     phoneNo: {
         type: Number,
-        min: [10, 'Minimum 10 numbers allow'],
-        max: [10, 'Maximum 10 numbers allow']
+        required: [true, 'Please enter the phone number']
+        // min: [8, 'Minimum 8 numbers allow'],
+        // max: [11, 'Maximum 10 numbers allow']
     },
 
     email: {
         type: String,
         trim: true,
-        required: [true, 'Please enter the email']
+        required: [true, 'Please enter the email'],
+        unique: [true, 'This email has already exist']
     },
 
     password: {
