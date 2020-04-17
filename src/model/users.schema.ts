@@ -33,7 +33,7 @@ export const UserSchema = {
         required: [true, 'Please enter the password']
     },
 
-    token: {
+    accessToken: {
         type: String,
         trim: true,
     }
