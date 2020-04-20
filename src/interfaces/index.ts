@@ -1,3 +1,3 @@
 
+export { User } from './user.interface';
 
-export const interfaces = [];
