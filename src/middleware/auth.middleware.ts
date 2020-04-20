@@ -9,6 +9,7 @@ export class LoggerMiddleware implements NestMiddleware {
 
         const token = req.header('Authorization').replace('Bearer ', '')
         const data = jwt.verify(token, process.env.SECRET_KEY)
+        
         if (!data) {
             throw new HttpException('Not authorized to access this resource', HttpStatus.UNAUTHORIZED);
         }
