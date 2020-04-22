@@ -1,14 +1,12 @@
-<<<<<<< HEAD
-
-
-export const Models = [];
-=======
 import * as mongoose from 'mongoose';
 
 import { UserSchema } from "./users.schema";
+import { ProductSchema } from './products.schema';
+import { CategorySchema } from './categories.schema';
 
 
 export const Models = [
-    { name: 'User', schema: new mongoose.Schema(UserSchema) }
+    { name: 'User', schema: new mongoose.Schema(UserSchema) },
+    { name: 'Product', schema: new mongoose.Schema(ProductSchema) },
+    { name: 'Category', schema: new mongoose.Schema(CategorySchema) }
 ];
->>>>>>> fb59fe3cbe8de59dd20ed236fca5bb0f8ae35cd4

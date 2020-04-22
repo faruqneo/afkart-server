@@ -23,13 +23,15 @@ export class UserService {
         }
     }
 
-    async login(user: User): Promise<any> {
+    async login(user: User): Promise<User> {
         try {
             const { email, password } = user;
             const data = await this.userModel.findOne({ email });
             const match = await bcrypt.compare(password, data.password);
+            
             if (!match)
                 throw new HttpException('Please enter valid credentials', HttpStatus.NOT_FOUND);
+
             return data;
         } catch (error) {
             throw new HttpException(error.message, HttpStatus.NOT_FOUND);
