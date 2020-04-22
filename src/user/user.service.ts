@@ -28,11 +28,11 @@ export class UserService {
             const { email, password } = user;
             const data = await this.userModel.findOne({ email });
             const match = await bcrypt.compare(password, data.password);
-            if (match)
-                return data;
-            throw new HttpException('Please enter valid credentials', HttpStatus.NOT_FOUND);
+            if (!match)
+                throw new HttpException('Please enter valid credentials', HttpStatus.NOT_FOUND);
+            return data;
         } catch (error) {
-            throw new HttpException('Please enter valid credentials', HttpStatus.NOT_FOUND);
+            throw new HttpException(error.message, HttpStatus.NOT_FOUND);
         }
     }
 
