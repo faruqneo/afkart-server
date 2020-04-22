@@ -1,4 +1,4 @@
-import { uuid } from 'node-uuid'
+import { v4 as uuidv4 } from 'uuid';
 import { Schema } from 'mongoose';
 
 export const ProductSchema = {
@@ -17,7 +17,7 @@ export const ProductSchema = {
 
     sku: {
         type: String,
-        default: uuid.v1
+        default: uuidv4
     },
 
     category: {

@@ -1,4 +1,4 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { Document } from "mongoose";
 
 export class ProductDto extends Document {
@@ -17,9 +17,9 @@ export class ProductDto extends Document {
     @ApiProperty()
     readonly description: string;
 
-    @ApiProperty()
-    readonly tags: Array<string>;
+    @ApiPropertyOptional()
+    readonly tags?: Array<string>;
 
     @ApiProperty()
-    readonly files: Array<object>;
+    readonly files?: Array<Object>;
 }
