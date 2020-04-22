@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 8000;
   const options = new DocumentBuilder()
   .setTitle('AFkart')
   .setDescription('API documention of afkart store. ')
-  .setVersion('1.0')
+  .setVersion('2.0')
   .build()
 
   const document = SwaggerModule.createDocument(app, options);

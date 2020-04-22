@@ -1,10 +1,10 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { Document, Schema } from "mongoose";
 
 export class CategoryDto extends Document {
     @ApiProperty()
     readonly title: string;
 
-    @ApiProperty()
-    readonly products: Array<Schema.Types.ObjectId>;
+    // @ApiPropertyOptional()
+    // readonly products?: Array<Schema.Types.ObjectId>;
 }

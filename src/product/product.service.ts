@@ -1,8 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Product } from '../interfaces';
-import { Category } from 'src/interfaces/category.interface';
+import { Product, Category } from '../interfaces';
 
 @Injectable()
 export class ProductService {
@@ -12,7 +11,7 @@ export class ProductService {
         @InjectModel('Category') private readonly categoryModel: Model<Category>
     ) { }
 
-    async getProducts(productQuery: any): Promise<any[]> {
+    async getProducts(productQuery: Product): Promise<any[]> {
         const { id, title, vendor, sku, category, price, tags } = productQuery
         try {
             const options = {};
@@ -45,17 +44,18 @@ export class ProductService {
             return data;
             // return await this.productModel.create(product);
         } catch (error) {
-            throw new HttpException(error.message, HttpStatus.BAD_GATEWAY);
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
         }
     }
 
     async editProduct(id: string, product: Product): Promise<Product> {
         try {
-            if (product.category) {
+            const data = await this.productModel.findByIdAndUpdate(id, product, { new: true });
+            if (product.category && data) {
                 await this.categoryModel.update({}, { $pull: { products: id } }, { multi: true });
-                await this.categoryModel.findByIdAndUpdate(product.category, { $push: { products: product._id } }, { new: true, upsert: true });
+                await this.categoryModel.findByIdAndUpdate(product.category, { $push: { products: id } }, { new: true, upsert: true });
             }
-            return await this.productModel.findByIdAndUpdate(id, { product }, { new: true });
+            return data;
         } catch (error) {
             throw new HttpException('Please enter valid id', HttpStatus.NO_CONTENT);
         }
