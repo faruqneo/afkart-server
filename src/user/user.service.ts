@@ -23,7 +23,7 @@ export class UserService {
         }
     }
 
-    async login(user: User): Promise<any> {
+    async login(user: User): Promise<User> {
         try {
             const { email, password } = user;
             const data = await this.userModel.findOne({ email });
