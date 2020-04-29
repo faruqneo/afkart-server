@@ -39,8 +39,9 @@ export class ProductService {
 
     async createProduct(product: Product): Promise<Product> {
         try {
-            console.log(product)
+            // console.log(product)
             const data = await this.productModel.create(product);
+            console.log(data)
             await this.categoryModel.findByIdAndUpdate(data.category, { $push: { products: data._id } }, { new: true, upsert: true });
             return data;
             // return await this.productModel.create(product);
