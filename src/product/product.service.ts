@@ -43,7 +43,7 @@ export class ProductService {
             console.log(product)
             const data = await this.productModel.create(product);
             console.log(data)
-            await this.categoryModel.findByIdAndUpdate(data.category, { $push: { products: data._id } }, { new: true, upsert: true });
+            await this.categoryModel.findByIdAndUpdate(data.category, { $push: { products: data._id } });
             return data;
             // return await this.productModel.create(product);
         } catch (error) {
