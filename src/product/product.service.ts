@@ -33,19 +33,21 @@ export class ProductService {
 
             return await this.productModel.find(options);
         } catch (error) {
+            console.log(error)
             throw new HttpException('No data found', HttpStatus.NOT_FOUND);
         }
     }
 
     async createProduct(product: Product): Promise<Product> {
         try {
-            // console.log(product)
+            console.log(product)
             const data = await this.productModel.create(product);
             console.log(data)
             await this.categoryModel.findByIdAndUpdate(data.category, { $push: { products: data._id } }, { new: true, upsert: true });
             return data;
             // return await this.productModel.create(product);
         } catch (error) {
+            console.log(error)
             throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
         }
     }
@@ -59,6 +61,7 @@ export class ProductService {
             }
             return data;
         } catch (error) {
+            console.log(error)
             throw new HttpException('Please enter valid id', HttpStatus.NO_CONTENT);
         }
     }
@@ -68,6 +71,7 @@ export class ProductService {
             await this.categoryModel.update({}, { $pull: { products: id } }, { multi: true });
             return await this.productModel.findByIdAndRemove(id);
         } catch (error) {
+            console.log(error)
             throw new HttpException('Please enter valid id', HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
