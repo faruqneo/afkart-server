@@ -11,8 +11,9 @@ export class ProductService {
         @InjectModel('Category') private readonly categoryModel: Model<Category>
     ) { }
 
-    async getProducts(productQuery: Product): Promise<any[]> {
-        const { id, title, vendor, sku, category, price, tags } = productQuery
+    async getProducts(productQuery: any): Promise<Product[]> {
+        // console.log(productQuery)
+        let { id, title, vendor, sku, category, price, tags } = productQuery
         try {
             const options = {};
 
@@ -28,9 +29,11 @@ export class ProductService {
                 options["category"] = category;
             if (price)
                 options["price"] = price;
-            if (tags)
-                options["tags"] = { $in: [...tags] };
-
+            if (tags) {
+                tags = tags.trim().split(",");
+                options["tags"] = { $in: tags };
+            }
+            // console.log(JSON.stringify(options))
             return await this.productModel.find(options);
         } catch (error) {
             console.log(error)

@@ -18,7 +18,7 @@ export class ProductController {
     @ApiQuery({ name: 'price', required: false })
     @ApiQuery({ name: 'tags', required: false })
     @Get()
-    async getProducts(@Query() productQuery: Product): Promise<any[]> {
+    async getProducts(@Query() productQuery: Product): Promise<Product[]> {
         return await this.productService.getProducts(productQuery);
     }
 
