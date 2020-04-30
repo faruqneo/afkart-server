@@ -5,6 +5,7 @@ export const CategorySchema = {
     title: {
         type: String,
         trim: true,
+        unique: [true, 'This title has already exist'],
         required: [true, 'Please enter categoy title']
     },
 
